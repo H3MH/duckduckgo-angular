@@ -1,0 +1,67 @@
+<ng-template #dialog>
+  <nb-card>
+    <nb-card-header>Dialog</nb-card-header>
+    <nb-card-body>Hello world!</nb-card-body>
+  </nb-card>
+</ng-template>
+
+<nb-card>
+  <nb-card-header>
+    Layout Rotate Search
+  </nb-card-header>
+  <nb-card-body>
+    <nb-search
+      (search)="searchFunc($event)"
+      type="rotate-layout"
+      tag="rotate-layout"
+    ></nb-search>
+  </nb-card-body>
+</nb-card>
+
+<div *ngIf="searchTickers">
+  <!-- Type: response category, i.e. A (article), D (disambiguation), C (category), N (name), E (exclusive), or nothing. -->
+  <div [ngSwitch]="searchTickers.Type">
+    <nb-card *ngSwitchCase="'A'" status="success">
+      <nb-card-header>{{ searchTickers.Heading || '-' }}</nb-card-header>
+      <nb-card-body>
+        <div *ngIf="searchTickers?.Image" class="search-result-image">
+          <img [src]="getImage(searchTickers?.Image)" />
+        </div>
+        {{ searchTickers.AbstractText || '-' }}
+      </nb-card-body>
+      <nb-card-footer>
+        {{ searchTickers.AbstractSource || '-' }}</nb-card-footer
+      >
+    </nb-card>
+
+    <nb-card *ngSwitchCase="'C'" (click)="clear() && hide()">
+      <nb-card-header>busqueda</nb-card-header>
+      <nb-card-body>
+        <nb-card
+          *ngFor="let stock of searchTickers?.RelatedTopics"
+          accent="info"
+        >
+          <nb-card-header>You searched for:</nb-card-header>
+          <nb-card-body>
+            <div *ngIf="stock?.Icon?.URL" class="search-result-image">
+              <img [src]="getImage(stock?.Icon?.URL)" />
+            </div>
+            {{ stock.Text || '-' }}
+          </nb-card-body>
+        </nb-card>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card *ngSwitchDefault>
+      <nb-card-header>busqueda</nb-card-header>
+      <nb-card-body>
+        <nb-card accent="danger">
+          <nb-card-header>You searched for:</nb-card-header>
+          <nb-card-body>
+            No se Encontraron Resultados
+          </nb-card-body>
+        </nb-card>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
