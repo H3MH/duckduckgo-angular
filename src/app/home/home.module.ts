@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NbButtonModule, NbCardModule, NbDialogModule } from "@nebular/theme";
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from "@angular/common/http";
 
 import { HomeRoutingModule } from "./home-routing.module";
-import { HomeComponent } from "./home.component";
+import { HomeComponent,HighlightSearch } from "./home.component";
 import {
   NbAlertModule,
   NbIconModule,
@@ -13,7 +13,7 @@ import {
 } from "@nebular/theme";
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, HighlightSearch],
   imports: [
     CommonModule,
     NbCardModule,

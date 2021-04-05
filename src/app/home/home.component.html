@@ -18,7 +18,7 @@
   </nb-card-body>
 </nb-card>
 
-<div *ngIf="searchTickers">
+<div *ngIf="searchTickers" [innerText]="">
   <!-- Type: response category, i.e. A (article), D (disambiguation), C (category), N (name), E (exclusive), or nothing. -->
   <div [ngSwitch]="searchTickers.Type">
     <nb-card *ngSwitchCase="'A'" status="success">
@@ -27,7 +27,7 @@
         <div *ngIf="searchTickers?.Image" class="search-result-image">
           <img [src]="getImage(searchTickers?.Image)" />
         </div>
-        {{ searchTickers.AbstractText || '-' }}
+        <div [innerHTML]="searchTickers.AbstractText | highlight: search"></div>
       </nb-card-body>
       <nb-card-footer>
         {{ searchTickers.AbstractSource || '-' }}</nb-card-footer
